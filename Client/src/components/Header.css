@@ -1,0 +1,36 @@
+.header {
+  padding: 0.5em 1em;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+}
+
+.header .hamburger-react {
+  margin-right: 2em;
+}
+
+.header .left {
+  display: flex;
+  align-items: center;
+}
+
+.header .right {
+  display: flex;
+  align-items: center;
+}
+
+.header .Dropdown-menu {
+  position: absolute;
+}
+
+.header input[type="text"] {
+  padding: 10px;
+  margin-right: 0.5em;
+}
+
+.header svg {
+  color: rgb(212, 211, 211);
+  font-size: 2em;
+  margin-left: 0.5em;
+}

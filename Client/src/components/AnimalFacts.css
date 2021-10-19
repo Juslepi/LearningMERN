@@ -1,0 +1,23 @@
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-container button {
+  margin: 0 1em;
+  color: #fff;
+  background: rgb(47, 46, 51);
+  height: 3em;
+  width: 7em;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-container button:hover {
+  background-color: rgb(57, 57, 255);
+}
