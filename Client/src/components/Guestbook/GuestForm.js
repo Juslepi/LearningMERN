@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const GuestForm = ({ messageList, addMessage }) => {
+export const GuestForm = ({ setMessages }) => {
   const [state, setState] = useState({
     author: "",
     message: "",
@@ -20,7 +20,6 @@ export const GuestForm = ({ messageList, addMessage }) => {
     const date = new Date().toLocaleDateString();
     const time = new Date().toLocaleTimeString();
 
-    console.log(date);
     const newMessage = {
       author: state.author,
       message: state.message,
@@ -38,7 +37,11 @@ export const GuestForm = ({ messageList, addMessage }) => {
 
     fetch("/api/messages/", requestOptions)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+    
+    // Fetch updated messages
+    fetch("/api/messages")
+      .then((res) => res.json())
+      .then((data) => setMessages(data))
 
     setState({
       author: "",

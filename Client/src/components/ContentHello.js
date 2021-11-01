@@ -2,7 +2,7 @@ import React from "react";
 
 const ContentHello = () => {
   const onClick = () => {
-    fetch("/api").then((res) => res.json()).then(data => console.log(data));
+    fetch("/api").then((res) => res.json())
   };
 
   return (

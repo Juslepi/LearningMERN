@@ -16,7 +16,7 @@ const Guestbook = () => {
   return (
     <div className="guestbook-container">
       <h3>Guestbook</h3>
-      <Form messageList={messages} />
+      <Form messageList={messages} setMessages={setMessages}/>
       <GuestList messages={messages} />
     </div>
   );
