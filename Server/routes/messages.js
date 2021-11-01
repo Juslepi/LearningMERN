@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
   const messages = db.collection("messages");
 
   const cursor = messages.find();
-  cursor.sort({ date: 1 });
+  cursor.sort({ date: 1, time: -1 });
   const all = await cursor.toArray();
 
   res.json(all);
@@ -31,6 +31,7 @@ router.post("/", async (req, res) => {
       author: req.body.author,
       message: req.body.message,
       date: req.body.date,
+      time: req.body.time,
     };
 
     console.log(messageDocument);

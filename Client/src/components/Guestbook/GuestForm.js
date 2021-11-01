@@ -15,11 +15,17 @@ export const GuestForm = ({ messageList, addMessage }) => {
   };
 
   const onSubmit = async (e) => {
+    e.preventDefault();
+
     const date = new Date().toLocaleDateString();
+    const time = new Date().toLocaleTimeString();
+
+    console.log(date);
     const newMessage = {
       author: state.author,
       message: state.message,
       date: date,
+      time: time,
     };
 
     const requestOptions = {
