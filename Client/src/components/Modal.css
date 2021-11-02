@@ -1,8 +1,18 @@
-.modal-form {
+.modal-container {
   display: flex;
   flex-direction: column;
   padding: 2em;
   border: 1px solid black;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-form label {

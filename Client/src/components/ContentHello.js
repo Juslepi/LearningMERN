@@ -5,7 +5,7 @@ const ContentHello = () => {
 
   return (
     <div>
-      <Modal firstInput="username" secondInput="password" />
+      <Modal title="Login" firstInput="username" secondInput="password" />
     </div>
   );
 };
