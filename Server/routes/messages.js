@@ -34,7 +34,6 @@ router.post("/", async (req, res) => {
       time: req.body.time,
     };
 
-    console.log(messageDocument);
     // Insert document and wait for promise
     await collection.insertOne(messageDocument);
     // Find one document
