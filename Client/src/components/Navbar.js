@@ -8,18 +8,18 @@ const Navbar = () => {
     <nav className="nav">
       <ul>
         <li>
-          <Link to="/facts">
+          <Link to="/hello">
             <div className="link">
               <FaBezierCurve />
-              <p>Facts</p>
+              <p>User</p>
             </div>
           </Link>
         </li>
         <li>
-          <Link to="/hello">
+          <Link to="/facts">
             <div className="link">
               <FaBezierCurve />
-              <p>Hello</p>
+              <p>Facts</p>
             </div>
           </Link>
         </li>
