@@ -1,0 +1,23 @@
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  border: 1px solid black;
+}
+
+.modal-form label {
+  margin-top: 1em;
+}
+
+.modal-form input {
+    padding: 0.5em;
+}
+
+.modal-form input[type="submit"] {
+  margin-top: 1em;
+    color: #fff;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  border: none;
+  background-color: rgb(57, 120, 255);
+}
