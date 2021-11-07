@@ -1,18 +1,14 @@
 import { useState } from "react";
 import "./Modal.css";
 
-const Modal = ({ title, firstInput, secondInput }) => {
+const Modal = ({ title, firstInput, secondInput, onSubmit }) => {
   const [visible, setVisible] = useState(true);
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
 
   return (
     <div
       className="modal-container"
       style={{ display: visible ? "block" : "none" }}
     >
-      {" "}
       <div className="modal-header">
         <h3>{title}</h3>
         <button

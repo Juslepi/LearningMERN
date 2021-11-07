@@ -29,6 +29,7 @@ const verifyToken = (req, res, next) => {
 router.post("/login", async (req, res) => {
   await client.connect();
   users = db.collection("users");
+
   try {
     const { username, password } = req.body;
     // Validate input
@@ -39,9 +40,8 @@ router.post("/login", async (req, res) => {
     user = await users.findOne({ user: username });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      console.log("Not implemented");
-
-      jwt.sign({ user }, "secretkey", { expiresIn: "30s" }, (err, token) => {
+      console.log("user found");
+      jwt.sign({ user }, "secretkey", (err, token) => {
         res.json({
           token,
         });
@@ -61,6 +61,13 @@ router.post("/delete", verifyToken, (req, res) => {
     } else {
       res.json({ msg: "User deleted", authData });
     }
+  });
+});
+
+router.get("/testing", verifyToken, (req, res) => {
+  jwt.verify(req.token, "secretkey", (err, authData) => {
+    if (err) res.sendStatus(403);
+    else res.json({ msg: "Token here" });
   });
 });
 

@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import AnimalFacts from "./components/AnimalFacts";
-import ContentHello from "./components/ContentHello";
+import Login from "./components/Login";
 import Guestbook from "./components/Guestbook/Guestbook";
 
 import "./App.css";
@@ -27,8 +27,8 @@ function App() {
           <Route path="/facts">
             <AnimalFacts />
           </Route>
-          <Route path="/hello">
-            <ContentHello />
+          <Route path="/login">
+            <Login />
           </Route>
           <Route path="/guestbook">
             <Guestbook />

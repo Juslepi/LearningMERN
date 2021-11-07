@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="nav">
       <ul>
         <li>
-          <Link to="/hello">
+          <Link to="/login">
             <div className="link">
               <FaBezierCurve />
               <p>User</p>
