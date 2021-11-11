@@ -7,11 +7,7 @@ const ContentHello = () => {
     password: "",
   });
 
-  const [loggedIn, setLoggedIn] = useState({
-    loggedIn: false,
-    loggedInAs: "",
-    token: "none",
-  });
+  const [error, setError] = useState("");
 
   const onChange = (e) => {
     const value = e.target.value;
@@ -36,11 +32,10 @@ const ContentHello = () => {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("user", JSON.stringify(data));
-          setLoggedIn({
-            loggedIn: true,
-            loggedInAs: data.username,
-            token: data.token,
-          });
+          setError("Logged in");
+          window.location.reload(false);
+        } else {
+          setError("Invalid Credentials");
         }
       })
       .catch((err) => console.log(err));
@@ -77,10 +72,11 @@ const ContentHello = () => {
         <input type="submit" value="Submit" />
       </form>
       <button onClick={test}>response</button>
-      <div className="logged-in">
-        {loggedIn.loggedIn
-          ? "Logged in as " + loggedIn.loggedInAs
-          : "Not logged in"}
+      <div
+        className="error-message"
+        style={{ textAlign: "center", color: "red", marginTop: "1em" }}
+      >
+        {error}
       </div>
     </div>
   );

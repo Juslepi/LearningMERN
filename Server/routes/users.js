@@ -34,10 +34,6 @@ router.post("/login", async (req, res) => {
 
   try {
     const { username, password } = req.body;
-    // Validate input
-    if (!username && !password) {
-      res.status(400).send("Fill all fields");
-    }
 
     user = await users.findOne({ user: username });
 
@@ -51,7 +47,7 @@ router.post("/login", async (req, res) => {
       });
     } else {
       console.log("Invalid credentials");
-      res.status(404).json({ msg: "Invalid credentials" });
+      res.status(403).json({ msg: "Invalid credentials" });
     }
   } catch (err) {
     console.log(err);
