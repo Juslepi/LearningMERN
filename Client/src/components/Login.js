@@ -65,11 +65,9 @@ const ContentHello = () => {
         <h3>Login</h3>
       </div>
       <form className="modal-form" onSubmit={onSubmit}>
-        <label>Username</label>
-        <input type="text" name="username" onChange={onChange} />
-        <label>password</label>
-        <input type="password" name="password" onChange={onChange} />
-        <input type="submit" value="Submit" />
+        <input type="text" name="username" placeholder="username" onChange={onChange} />
+        <input type="password" name="password" placeholder="password" onChange={onChange} />
+        <input type="submit" value="LOGIN" />
       </form>
       <button onClick={test}>response</button>
       <div
