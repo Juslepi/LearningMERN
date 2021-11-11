@@ -7,6 +7,12 @@ const ContentHello = () => {
     password: "",
   });
 
+  const [loggedIn, setLoggedIn] = useState({
+    loggedIn: false,
+    loggedInAs: "",
+    token: "none",
+  });
+
   const onChange = (e) => {
     const value = e.target.value;
     setloginCredentials({
@@ -27,13 +33,35 @@ const ContentHello = () => {
     };
     fetch("/api/users/login", requestOptions)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("user", JSON.stringify(data));
+          setLoggedIn({
+            loggedIn: true,
+            loggedInAs: data.username,
+            token: data.token,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const authHeader = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user && user.token) {
+      return { "x-access-token": user.token };
+    } else return {};
   };
 
   const test = () => {
-    fetch("/api/users/testing")
-      .then((res) => console.log(res))
-      .then((data) => console.log(data));
+    const requestOptions = {
+      method: "POST",
+      headers: authHeader(),
+    };
+    fetch("/api/users/testing", requestOptions)
+      .then((res) => res.json())
+      .then((json) => console.log(json));
   };
 
   return (
@@ -49,6 +77,11 @@ const ContentHello = () => {
         <input type="submit" value="Submit" />
       </form>
       <button onClick={test}>response</button>
+      <div className="logged-in">
+        {loggedIn.loggedIn
+          ? "Logged in as " + loggedIn.loggedInAs
+          : "Not logged in"}
+      </div>
     </div>
   );
 };

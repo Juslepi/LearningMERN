@@ -14,16 +14,18 @@ const db = client.db();
 // Verify Token
 const verifyToken = (req, res, next) => {
   // Get auth header value
-  const bearerHeader = req.headers["authorization"];
+  const token = req.headers["x-access-token"];
 
-  if (typeof bearerHeader !== "undefined") {
-    const bearer = bearerHeader.split(" ");
-    const bearerToken = bearer[1];
-    req.token = bearerToken;
-    next();
-  } else {
-    res.sendStatus(403);
+  if (!token) {
+    return res.status(403).send({ msg: "No token provided" });
   }
+
+  jwt.verify(token, "secretkey", (err, user) => {
+    if (err) {
+      return res.status(401).send({ msg: "Unauthorized" });
+    }
+    next();
+  });
 };
 
 router.post("/login", async (req, res) => {
@@ -40,12 +42,16 @@ router.post("/login", async (req, res) => {
     user = await users.findOne({ user: username });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      console.log("user found");
       jwt.sign({ user }, "secretkey", (err, token) => {
         res.json({
           token,
+          username: user.user,
+          user_id: user._id,
         });
       });
+    } else {
+      console.log("Invalid credentials");
+      res.status(404).json({ msg: "Invalid credentials" });
     }
   } catch (err) {
     console.log(err);
@@ -54,21 +60,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/delete", verifyToken, (req, res) => {
-  jwt.verify(req.token, "secretkey", (err, authData) => {
-    if (err) {
-      res.sendStatus(403);
-    } else {
-      res.json({ msg: "User deleted", authData });
-    }
-  });
-});
-
-router.get("/testing", verifyToken, (req, res) => {
-  jwt.verify(req.token, "secretkey", (err, authData) => {
-    if (err) res.sendStatus(403);
-    else res.json({ msg: "Token here" });
-  });
+router.post("/testing", verifyToken, (req, res) => {
+  console.log(":D");
 });
 
 module.exports = router;
